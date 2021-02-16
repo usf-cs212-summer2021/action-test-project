@@ -1,0 +1,29 @@
+{
+  "name": "action-test-project",
+  "version": "1.0.0",
+  "description": "Github action to test projects.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/usf-cs212-spring2021/action-test-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/usf-cs212-spring2021/action-test-project/issues"
+  },
+  "homepage": "https://github.com/usf-cs212-spring2021/action-test-project#readme",
+  "dependencies": {
+    "@actions/artifact": "^0.5.0",
+    "@actions/cache": "^1.0.6",
+    "@actions/core": "^1.2.6",
+    "@actions/exec": "^1.0.4",
+    "@actions/github": "^4.0.0",
+    "@actions/glob": "^0.1.1",
+    "ansi-styles": "^5.1.0"
+  }
+}

@@ -1,0 +1,17 @@
+name: 'Test Project'
+description: 'Github Action to run project tests.'
+
+inputs:
+  token:
+    description: 'Authentication token to access the project repositories'
+    required: true
+
+  project:
+    description: 'Project number to test (for debugging only)'
+    required: false
+
+runs:
+  using: 'node12'
+  pre: 'setup.js'
+  main: 'index.js'
+  post: 'cleanup.js'
