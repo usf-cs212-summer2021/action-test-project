@@ -32,6 +32,9 @@ async function run() {
     const tokens = ref.split('/');
     const version = tokens[tokens.length - 1];
 
+    core.info(`Using ref: ${ref}`);
+    core.info(`Using version: ${version}`);
+
     const regex = /^v([1-4])\.(\d+)\.(\d+)$/;
     const matched = version.match(regex);
 
