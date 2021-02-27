@@ -49,11 +49,11 @@ async function run() {
       const valid = new Set(['1', '2', '3a', '3b', '4']);
       const project = core.getInput('project');
 
-      if (valid.has(project)) {
+      if (project && valid.has(project)) {
         states.project = project;
       }
       else {
-        core.info(`Input ${project} is invalid; using default.`);
+        throw new Error(`Unable to determine project from ${version} or user input. Double check release is properly named (with a lowercase "v" at the start).`);
       }
     }
 
