@@ -80,7 +80,7 @@ async function run() {
     core.startGroup('Compiling project test code...');
 
     status.testCompile = await utils.checkExec('mvn', {
-      param: ['-ntp', '-DcompileOptionXlint="-Xlint:none"', '-DcompileOptionXdoclint="-Xdoclint:none"', '-DcompileOptionFail="false"', '-Dmaven.compiler.showWarnings="true"', 'test-compile'],
+      param: ['-ntp', '-DcompileOptionXlint="-Xlint:none"', '-DcompileOptionXdoclint="-Xdoclint:none"', '-DcompileOptionFail=false', , '-Dmaven.compiler.failOnWarning=false', '-Dmaven.compiler.showWarnings="true"', 'test-compile'],
       title: 'Compiling project test code',
       error: 'Compiling returned non-zero exit code',
       chdir: `${utils.mainDir}/`
