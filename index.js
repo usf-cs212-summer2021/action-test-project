@@ -59,10 +59,16 @@ async function run() {
     // -----------------------------------------------
     core.startGroup('Compiling project main code...');
 
+    status.mainWarnings = await utils.checkExec('mvn', {
+      param: ['-ntp', '-DcompileOptionXlint=-Xlint:all', '-DcompileOptionXdoclint=-Xdoclint:all/private', '-Dmaven.compiler.showWarnings=true', '-DcompileOptionFail=false', '-Dmaven.compiler.failOnWarning=false', '-Dmaven.javadoc.failOnError=false', '-Dmaven.javadoc.failOnWarnings=false', 'compile'],
+      title: 'Compiling project main code (with warnings enabled)',
+      chdir: `${utils.mainDir}/`
+    });
+
     status.mainCompile = await utils.checkExec('mvn', {
-      param: ['-ntp', '-DcompileOptionXlint=-Xlint:none', '-DcompileOptionXdoclint=-Xdoclint:none', '-Dmaven.compiler.showWarnings=false', '-DcompileOptionFail=false', '-Dmaven.compiler.failOnWarning=false', 'compile'],
-      title: 'Compiling project main code',
-      error: 'Compiling returned non-zero exit code',
+      param: ['-ntp', '-DcompileOptionXlint=-Xlint:none', '-DcompileOptionXdoclint=-Xdoclint:none', '-Dmaven.compiler.showWarnings=false', '-DcompileOptionFail=false', '-Dmaven.compiler.failOnWarning=false', 'clean', 'compile'],
+      title: 'Recompiling project main code (with warnings disabled)',
+      error: 'Recompiling returned non-zero exit code',
       chdir: `${utils.mainDir}/`
     });
 
