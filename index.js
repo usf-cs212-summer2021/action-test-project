@@ -60,17 +60,21 @@ async function run() {
     core.startGroup('Compiling project main code...');
 
     status.mainWarnings = await utils.checkExec('mvn', {
-      param: ['-ntp', '-DcompileOptionXlint=-Xlint:all', '-DcompileOptionXdoclint=-Xdoclint:all/private', '-Dmaven.compiler.showWarnings=true', '-DcompileOptionFail=false', '-Dmaven.compiler.failOnWarning=false', '-Dmaven.javadoc.failOnError=false', '-Dmaven.javadoc.failOnWarnings=false', 'compile'],
+      param: ['-ntp', '-DcompileOptionXlint=-Xlint:all', '-DcompileOptionXdoclint=-Xdoclint:all/private', '-Dmaven.compiler.showWarnings=true', '-DcompileOptionFail=true', 'compile'],
       title: 'Compiling project main code (with warnings enabled)',
       chdir: `${utils.mainDir}/`
     });
 
     status.mainCompile = await utils.checkExec('mvn', {
-      param: ['-ntp', '-DcompileOptionXlint=-Xlint:none', '-DcompileOptionXdoclint=-Xdoclint:none', '-Dmaven.compiler.showWarnings=false', '-DcompileOptionFail=false', '-Dmaven.compiler.failOnWarning=false', 'clean', 'compile'],
+      param: ['-ntp', '-DcompileOptionXlint=-Xlint:none', '-DcompileOptionXdoclint=-Xdoclint:none', '-Dmaven.compiler.showWarnings=false', '-DcompileOptionFail=false', 'clean', 'compile'],
       title: 'Recompiling project main code (with warnings disabled)',
       error: 'Recompiling returned non-zero exit code',
       chdir: `${utils.mainDir}/`
     });
+
+    if (status.mainWarnings != 0) {
+      utils.showWarning('Unable to compile code without warnings. This will not cause the tests to fail, but the warnings must be fixed before requesting code review.');
+    }
 
     await utils.checkExec('ls', {
       param: ['-m', `${utils.mainDir}/target/classes`],
