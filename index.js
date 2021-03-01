@@ -60,7 +60,7 @@ async function run() {
     core.startGroup('Compiling project main code...');
 
     status.mainCompile = await utils.checkExec('mvn', {
-      param: ['-ntp', '-DcompileOptionXlint="-Xlint:none"', '-DcompileOptionXdoclint="-Xdoclint:none"', '-DcompileOptionFail="false"', '-Dmaven.compiler.showWarnings="true"', 'compile'],
+      param: ['-ntp', '"-DcompileOptionXlint=-Xlint:all"', '"-DcompileOptionXdoclint=-Xdoclint:all/private"', '-DcompileOptionFail=false', '-Dmaven.compiler.showWarnings=true', 'compile'],
       title: 'Compiling project main code',
       error: 'Compiling returned non-zero exit code',
       chdir: `${utils.mainDir}/`
