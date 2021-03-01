@@ -73,7 +73,7 @@ async function run() {
     });
 
     if (status.mainWarnings != 0) {
-      utils.showWarning('Unable to compile code without warnings. This will not cause the tests to fail, but the warnings must be fixed before requesting code review.');
+      core.warning('Unable to compile code without warnings. This will not cause the tests to fail, but the warnings must be fixed before requesting code review.');
     }
 
     await utils.checkExec('ls', {
